@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "[ dead.works ]",
-  description: "a collection of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives",
+  description: "a list of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives",
 
   metadataBase: new URL("https://dead.works"),
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://dead.works",
     title: "dead.works",
-    description: "a collection of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives",
+    description: "a list of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives",
     images: [
       {
         url: "/imgs/meta-tags.png",
