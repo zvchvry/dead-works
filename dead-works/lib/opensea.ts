@@ -66,9 +66,7 @@ export async function getRandomCollectionImage(slug: string) {
   return nfts[idx];
 }
 
-export function openseaCollectionUrl(slug: string) {
-  return `https://opensea.io/collection/${slug}`;
-}
+
 // lib/chains.ts
 export const CHAIN_ICON: Record<string, string> = {
   ethereum: "/chains/ethereum.svg",

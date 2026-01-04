@@ -11,6 +11,7 @@ type ApiProject = {
   symbol: string | null;
   chain: string;
   collectionSlug: string;
+  contractAddress: string;
 };
 
 export function ProjectGrid() {
@@ -37,14 +38,16 @@ return (
   <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2">
     {projects.map((p) => (
       <ProjectCard
-        key={p.key}
-        title={p.title}
-        image={p.image}
-        floor={p.floor}
-        symbol={p.symbol}
-        chain={p.chain}
-        collectionSlug={p.collectionSlug}
-      />
+  key={p.key}
+  title={p.title}
+  image={p.image}
+  floor={p.floor}
+  symbol={p.symbol}
+  chain={p.chain}
+  collectionSlug={p.collectionSlug}
+  contractAddress={p.contractAddress}
+/>
+
     ))}
   </div>
 );
