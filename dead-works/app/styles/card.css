@@ -28,7 +28,7 @@
 /* ===== Title bar ===== */
 .project-card-title {
   width: 100%;
-  padding: 0.25rem .25rem;
+  padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: white;
@@ -84,7 +84,7 @@
 
 /* ===== Overlay (CARD-ONLY) ===== */
 .project-card-overlay {
-  position: absolute;   /* ✅ now relative to .project-card */
+  position: absolute;   
   inset: 0;
   z-index: 20;
 
