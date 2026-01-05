@@ -149,4 +149,18 @@ export const PROJECTS: ProjectDef[] = [
     collectionSlug: "evil-bobby-warpcasts",
     contractAddress: "0xb0dc372c051e693330e41f46ceb5573295807614", 
   },
+  {
+    key: "ghoulballs",
+    title: "ghoulBalls",
+    chain: "ethereum",
+    collectionSlug: "ghoulballs",
+    contractAddress: "0x71d870a0ab98d2d012a5579642dcbbf447607781", 
+  },
+   {
+    key: "basedghoulscustoms",
+    title: "Based Ghouls Customs",
+    chain: "ethereum",
+    collectionSlug: "basedghoulscustoms",
+    contractAddress: "0x2dada4aabfa8022953af11e58a61361d0f044256", 
+  },
 ];
