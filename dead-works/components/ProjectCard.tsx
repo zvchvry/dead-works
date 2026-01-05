@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CHAIN_ICON } from "@/lib/opensea";
+import { CHAIN_ICON } from "@/lib/chains";
 import { openseaCollectionUrl, sudoswapBrowseUrl } from "@/lib/marketplaces";
 import { formatPrice } from "@/lib/format";
 

@@ -9,23 +9,39 @@ function mustGetEnv(name: string) {
   return v;
 }
 
-async function openseaFetch<T>(path: string): Promise<T> {
+async function openseaFetch<T>(path: string, timeoutMs = 8000): Promise<T> {
   const apiKey = mustGetEnv("OPENSEA_API_KEY");
 
-  const res = await fetch(`${OPENSEA_BASE}${path}`, {
-    headers: {
-      "accept": "application/json",
-      "x-api-key": apiKey,
-    },
-    // caching handled at route-level; keep this default here
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`OpenSea error ${res.status}: ${text}`);
+  try {
+    const res = await fetch(`${OPENSEA_BASE}${path}`, {
+      headers: {
+        accept: "application/json",
+        "x-api-key": apiKey,
+        "user-agent": "dead.works/1.0", // helps with some CDNs
+      },
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`OpenSea error ${res.status}: ${text}`);
+    }
+
+    return (await res.json()) as T;
+  } catch (err: any) {
+    // Normalize abort errors
+    if (err?.name === "AbortError") {
+      throw new Error(`OpenSea request timed out after ${timeoutMs}ms: ${path}`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeoutId);
   }
-  return res.json() as Promise<T>;
 }
+
 
 export async function resolveSlugFromContract(def: ProjectDef): Promise<string | null> {
   if (def.collectionSlug) return def.collectionSlug;
