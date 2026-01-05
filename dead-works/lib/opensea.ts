@@ -68,15 +68,6 @@ export async function getFloorBySlug(slug: string) {
 
 
 
-// lib/chains.ts
-export const CHAIN_ICON: Record<string, string> = {
-  ethereum: "/chains/ethereum.svg",
-  base: "/chains/base.svg",
-  polygon: "/chains/polygon.svg",
-  arbitrum: "/chains/arbitrum.svg",
-  optimism: "/chains/optimism.svg",
-  zora: "/chains/zora.svg",
-};
 
 
 // lib/opensea.ts
@@ -93,4 +84,43 @@ export async function getCollectionImage(slug: string) {
 
   // Prefer the normal collection image; fall back to banner if needed
   return data.image_url ?? data.banner_image_url ?? null;
+}
+
+type NftsResponse = {
+  nfts?: Array<{
+    image_url?: string | null;
+    display_image_url?: string | null;
+  }>;
+};
+
+const IMAGE_POOL_CACHE = new Map<string, { ts: number; images: string[] }>();
+const IMAGE_POOL_TTL_MS = 10 * 60 * 1000; // 10 minutes
+
+export async function getRandomNftImageFromCollection(slug: string) {
+  const now = Date.now();
+  const cached = IMAGE_POOL_CACHE.get(slug);
+
+  // Use cached pool if fresh
+  if (cached && now - cached.ts < IMAGE_POOL_TTL_MS && cached.images.length > 0) {
+    const idx = Math.floor(Math.random() * cached.images.length);
+    return cached.images[idx];
+  }
+
+  // Build/refresh pool (fast: just first 50 NFTs)
+  const data = await openseaFetch<NftsResponse>(
+    `/collection/${encodeURIComponent(slug)}/nfts?limit=50`
+  );
+
+  const images =
+    (data.nfts ?? [])
+      .map((n) => n.image_url || n.display_image_url)
+      .filter(Boolean) as string[];
+
+  // cache pool (even if empty)
+  IMAGE_POOL_CACHE.set(slug, { ts: now, images });
+
+  if (images.length === 0) return null;
+
+  const idx = Math.floor(Math.random() * images.length);
+  return images[idx];
 }
