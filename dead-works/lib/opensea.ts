@@ -50,21 +50,6 @@ export async function getFloorBySlug(slug: string) {
   return { floor, symbol };
 }
 
-// lib/opensea.ts
-export async function getRandomCollectionImage(slug: string) {
-  const data = await openseaFetch<{
-    nfts?: Array<{ image_url?: string; display_image_url?: string }>;
-  }>(`/collection/${encodeURIComponent(slug)}/nfts?limit=50`);
-
-  const nfts = (data.nfts ?? [])
-    .map((n) => n.image_url || n.display_image_url)
-    .filter(Boolean) as string[];
-
-  if (nfts.length === 0) return null;
-
-  const idx = Math.floor(Math.random() * nfts.length);
-  return nfts[idx];
-}
 
 
 // lib/chains.ts
@@ -76,3 +61,20 @@ export const CHAIN_ICON: Record<string, string> = {
   optimism: "/chains/optimism.svg",
   zora: "/chains/zora.svg",
 };
+
+
+// lib/opensea.ts
+type CollectionResponse = {
+  image_url?: string | null;
+  banner_image_url?: string | null;
+};
+
+export async function getCollectionImage(slug: string) {
+  // Collection metadata (includes the "featured" collection image)
+  const data = await openseaFetch<CollectionResponse>(
+    `/collections/${encodeURIComponent(slug)}`
+  );
+
+  // Prefer the normal collection image; fall back to banner if needed
+  return data.image_url ?? data.banner_image_url ?? null;
+}

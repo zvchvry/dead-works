@@ -1,7 +1,7 @@
 // app/api/floors/route.ts
 import { NextResponse } from "next/server";
 import { PROJECTS } from "@/data/projects";
-import { getFloorBySlug, getRandomCollectionImage } from "@/lib/opensea";
+import { getFloorBySlug, getCollectionImage } from "@/lib/opensea";
 
 export const revalidate = 60;
 
@@ -10,7 +10,9 @@ export async function GET() {
     PROJECTS.map(async (p) => {
       try {
         const { floor, symbol } = await getFloorBySlug(p.collectionSlug);
-        const image = await getRandomCollectionImage(p.collectionSlug);
+
+        // NEW: use featured collection image
+        const image = await getCollectionImage(p.collectionSlug);
 
         return {
           ...p,
@@ -31,5 +33,5 @@ export async function GET() {
 
   results.sort((a, b) => (b.floor ?? -1) - (a.floor ?? -1));
 
-  return Response.json({ projects: results });
+  return NextResponse.json({ projects: results });
 }

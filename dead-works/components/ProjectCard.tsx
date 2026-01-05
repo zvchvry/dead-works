@@ -5,7 +5,6 @@ import { CHAIN_ICON } from "@/lib/opensea";
 import { openseaCollectionUrl, sudoswapBrowseUrl } from "@/lib/marketplaces";
 import { formatPrice } from "@/lib/format";
 
-
 type Props = {
   title: string;
   image: string | null;
@@ -31,7 +30,6 @@ export function ProjectCard({
   const osUrl = openseaCollectionUrl(collectionSlug);
   const sudoUrl = sudoswapBrowseUrl(chain, contractAddress);
 
-  // close on ESC
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -42,82 +40,61 @@ export function ProjectCard({
 
   return (
     <>
-      {/* Card */}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="group block w-full max-w-[300px] text-left"
+        className="project-card-button"
       >
-        <div
-          className="
-            relative overflow-hidden rounded-xl
-            border border-white/10 bg-black/20
-            transition-all duration-200
-            hover:-translate-y-1 hover:scale-[1.02]
-          "
-        >
-          {/* Title INSIDE card, ABOVE image */}
-          <div className="w-full bg-black/45 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
-            {title}
-          </div>
+        <div className="project-card">
+          <div className="project-card-title">{title}</div>
 
-          {/* Image */}
-          <div className="aspect-square w-full">
+          <div className="project-card-image-wrap">
             <img
-              src={image ?? "/images/placeholder.png"}
+              src={image ?? "/imgs/SKULL-ROTATE.gif"}
               alt={title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+              className="project-card-image"
               loading="lazy"
               referrerPolicy="no-referrer"
             />
           </div>
 
-          {/* Floor bottom-left */}
-          <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-lg bg-black/60 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+          <div className="project-card-floor">
             {chainIcon && (
               <img
                 src={chainIcon}
                 alt={chain}
-                className="h-4 w-4 opacity-90"
+                className="project-card-chain-icon"
                 loading="lazy"
               />
             )}
-                <span>
-                {floor == null
+            <span>
+              {floor == null
                 ? "—"
                 : `${formatPrice(floor)} ${symbol ?? ""}`.trim()}
-                </span>
+            </span>
           </div>
         </div>
       </button>
 
-      {/* Overlay */}
       {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* Backdrop */}
+        <div className="project-card-overlay" role="dialog" aria-modal="true">
           <button
             aria-label="Close"
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="project-card-backdrop"
             onClick={() => setOpen(false)}
-            type="button"
           />
 
-          {/* Modal */}
-          <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-xl border border-white/10 bg-neutral-950/90 shadow-xl">
-            <div className="px-4 py-3 text-sm font-semibold text-white/90">
+          <div className="project-card-modal">
+            <div className="project-card-modal-title">
               Open {title} on…
             </div>
 
-            <div className="px-4 pb-4 pt-2 flex flex-col gap-2">
+            <div className="project-card-modal-actions">
               <a
                 href={osUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
+                className="project-card-link"
                 onClick={() => setOpen(false)}
               >
                 OpenSea
@@ -127,7 +104,7 @@ export function ProjectCard({
                 href={sudoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition"
+                className="project-card-link"
                 onClick={() => setOpen(false)}
               >
                 Sudoswap
@@ -136,7 +113,7 @@ export function ProjectCard({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="mt-1 rounded-lg px-4 py-2 text-sm font-medium text-white/60 hover:text-white/80"
+                className="project-card-cancel"
               >
                 Cancel
               </button>
