@@ -48,6 +48,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* OpenSea image CDN preconnect */}
+        <link rel="preconnect" href="https://i.seadn.io" />
+        <link rel="dns-prefetch" href="https://i.seadn.io" />
+      </head>
+
       <body
         className={`
           ${geistSans.variable}

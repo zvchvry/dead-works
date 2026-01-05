@@ -51,7 +51,10 @@ export function ProjectCard({
 
         <div className="project-card-image-wrap">
           <img
-            src={image ?? "/imgs/SKULL-ROTATE.gif"}
+  src={image ?? "/imgs/SKULL-ROTATE.gif"}
+  onError={(e) => {
+    (e.currentTarget as HTMLImageElement).src = "/imgs/SKULL-ROTATE.gif";
+  }}
             alt={title}
             className="project-card-image"
             loading="lazy"
