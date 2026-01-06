@@ -26,7 +26,6 @@ body {
   color: #fff;
 }
 p{
-  margin-bottom: 7px;
   font-family: 'Fira Code', monospace;
 
 }
@@ -73,4 +72,16 @@ body.crt-page::before {
 @media (prefers-reduced-motion: reduce) {
   body.crt-page::before { animation: none; }
 }
+
+.footer{
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  margin-top: 3rem;
+  text-align: right;
+  display: flex;
+  gap: 0.75rem;        
+  align-items: center;
+  justify-content: end; 
+}
+
 

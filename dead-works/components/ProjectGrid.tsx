@@ -32,7 +32,7 @@ export function ProjectGrid() {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2">
+<div className="grid grid-cols-4 gap-4 pt-[7px] max-md:grid-cols-2">
       {projects.map((p) => (
         <ProjectCard
           key={p.key}
