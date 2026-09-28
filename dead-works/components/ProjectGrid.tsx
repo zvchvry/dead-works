@@ -42,7 +42,6 @@ export function ProjectGrid() {
           symbol={p.symbol}
           chain={p.chain}
           collectionSlug={p.collectionSlug}
-          contractAddress={p.contractAddress}
         />
       ))}
     </div>

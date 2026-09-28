@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CHAIN_ICON } from "@/lib/chains";
-import { openseaCollectionUrl, sudoswapBrowseUrl } from "@/lib/marketplaces";
+import { openseaCollectionUrl } from "@/lib/marketplaces";
 import { formatPrice } from "@/lib/format";
 
 type Props = {
@@ -12,7 +12,6 @@ type Props = {
   symbol: string | null;
   chain: string;
   collectionSlug: string;
-  contractAddress: string;
 };
 
 export function ProjectCard({
@@ -22,13 +21,11 @@ export function ProjectCard({
   symbol,
   chain,
   collectionSlug,
-  contractAddress,
 }: Props) {
   const [open, setOpen] = useState(false);
   const chainIcon = CHAIN_ICON[chain];
 
   const osUrl = openseaCollectionUrl(collectionSlug);
-  const sudoUrl = sudoswapBrowseUrl(chain, contractAddress);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -107,16 +104,6 @@ export function ProjectCard({
                   onClick={() => setOpen(false)}
                 >
                   OpenSea
-                </a>
-
-                <a
-                  href={sudoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-card-link"
-                  onClick={() => setOpen(false)}
-                >
-                  Sudoswap
                 </a>
 
                 <div
