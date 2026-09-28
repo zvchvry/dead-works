@@ -185,7 +185,7 @@ export default function SudoswapMarket({ featuredPools, initialIndex }: { featur
             : !pool ? <div className="sudo-empty"><span className="sudo-empty-symbol">†</span><h2>A home for your Ghouls</h2><p>Load a Based Ghouls v1 pool to see its inventory and get a live quote.</p><a href={V1_URL} target="_blank" rel="noreferrer">Explore on Sudoswap v1 ↗</a></div>
             : !allowed ? <div className="sudo-empty"><h2>{mode === "buy" ? "This pool only buys Ghouls" : "This pool only sells Ghouls"}</h2><p>Switch tabs or load another pool to continue.</p></div>
             : mode === "sell" ? <WalletGhouls key={`${account ?? "disconnected"}:${walletRevision}`} account={account} selected={sellId} disabled={!!busy} onSelect={id => { resetQuote(); setSellId(id); }} onConnect={connect} />
-            : <><div className="sudo-inventory-header"><span>{pool.ids.length} Ghouls available</span><input aria-label="Filter by token ID" placeholder="Search token ID…" value={filter} onChange={e => setFilter(e.target.value)} /></div>{shownIds.length ? <div className="sudo-nfts">{shownIds.map(id => <GhoulCard key={id.toString()} id={id} selected={selected === id} disabled={!!busy} onSelect={() => { resetQuote(); setSelected(selected === id ? null : id); }} />)}</div> : <div className="sudo-empty"><h2>{pool.ids.length ? "No matching Ghouls" : "No Ghouls in this pool"}</h2><p>{pool.ids.length ? "Try another token ID." : "Load another pool or come back later."}</p></div>}<p className="sudo-art-note">Artwork loads from collection metadata. Token IDs remain visible if images are unavailable.</p></>}
+            : <><div className="sudo-inventory-header"><span>{pool.ids.length} Ghouls available</span><input aria-label="Filter by token ID" placeholder="Search token ID…" value={filter} onChange={e => setFilter(e.target.value)} /></div>{shownIds.length ? <div className="sudo-nfts">{shownIds.map(id => <GhoulCard key={id.toString()} id={id} selected={selected === id} disabled={!!busy} onSelect={() => { resetQuote(); setSelected(selected === id ? null : id); }} />)}</div> : <div className="sudo-empty"><h2>{pool.ids.length ? "No matching Ghouls" : "No Ghouls in this pool"}</h2><p>{pool.ids.length ? "Try another token ID." : "Load another pool or come back later."}</p></div>}</>}
         </section>
         <aside className="sudo-order">
           <div className="sudo-order-title"><h2>Your trade</h2><span>↗</span></div>
@@ -200,7 +200,7 @@ export default function SudoswapMarket({ featuredPools, initialIndex }: { featur
           </div><div className="sudo-order-foot">DIRECT FROM THE POOL. TO YOUR WALLET.</div>
         </aside>
       </div>
-      <footer className="sudo-footer"><span>/can’t kill what’s already dead</span><div><a href={`https://etherscan.io/address/${FACTORY}#code`} target="_blank" rel="noreferrer">V1 factory ↗</a><a href={V1_URL} target="_blank" rel="noreferrer">Sudoswap v1 ↗</a></div></footer>
+      <footer className="sudo-footer"><span>/cant_kill_whats_already_dead</span><div><a href={`https://etherscan.io/address/${FACTORY}#code`} target="_blank" rel="noreferrer">V1 factory ↗</a><a href={V1_URL} target="_blank" rel="noreferrer">Sudoswap v1 ↗</a></div></footer>
     </main>
   );
 }
