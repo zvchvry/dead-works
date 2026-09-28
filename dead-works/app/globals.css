@@ -85,3 +85,6 @@ body.crt-page::before {
 }
 
 
+
+.sudo-home-link { display: inline-block; margin: 18px 0 6px; border: 1px solid #465139; padding: 10px 16px; color: #c8ff62; font: 12px "Fira Code", monospace; }
+.sudo-home-link:hover { background: #202a17; }
