@@ -1,21 +1,29 @@
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Typewriter } from "@/components/Typewriter";
 import Link from "next/link";
+import "./directory.css";
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-5xl p-6">
-      <h1 className="mb-4 font-bold italic">[ dead.works ]</h1>
-
-      <Typewriter
-        text={">a list of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives\n>can't kill what's already dead"}
-        speed={28}
-      />
+    <main className="directory-page">
+      <header className="directory-header">
+        <Link href="/" className="directory-wordmark">[ dead.works ]</Link>
+        <span className="directory-status"><i /> The directory</span>
+      </header>
+      <section className="directory-hero">
+        <Typewriter
+          text={">a list of 𝕲𝖍𝖔𝖚𝖑𝖘 projects and derivatives\n>can't kill what's already dead"}
+          speed={28}
+        />
+      </section>
+      <section aria-label="Collections" className="directory-collections">
+      <div className="directory-section-heading"><h2>Collections</h2></div>
       <ProjectGrid />
+      </section>
 
 
-<div className="footer">
-  <p>/i_love_you_ghouls</p>  |
+<footer className="directory-footer">
+  <p>/i_love_you_ghouls</p>
   <Link
     href="https://maranasati.com"
     target="_blank"
@@ -23,7 +31,7 @@ export default function Page() {
     className="footer-link"
   >maraṇasati.com
   </Link>
-</div>
+</footer>
     </main>
   );
 }

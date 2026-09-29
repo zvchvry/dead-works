@@ -60,6 +60,7 @@ export function ProjectCard({
         </div>
 
         <div className="project-card-floor">
+          <span className="project-card-floor-label">Floor</span>
           {chainIcon && (
             <img
               src={chainIcon}
